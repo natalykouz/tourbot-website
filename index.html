@@ -4,51 +4,296 @@
     <link rel="icon" href="favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tourbot — Платформа аудиоэкскурсий</title>
+    <title>Tourbot — Аудиоэкскурсии через Telegram</title>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
         }
-        .container {
-            text-align: center;
-            padding: 2rem;
-            max-width: 600px;
+        
+        nav {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
         }
-        h1 { font-size: 3rem; margin-bottom: 1rem; }
-        p { font-size: 1.2rem; opacity: 0.9; }
-        .contact { margin-top: 2rem; }
-        .contact a {
+        
+        nav div {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+        
+        nav a {
             color: white;
             text-decoration: none;
-            border-bottom: 2px solid white;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        
+        nav a:hover {
+            opacity: 0.8;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 8rem 2rem 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero img {
+            max-width: 150px;
+            margin-bottom: 1rem;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+        
+        .catalog {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .catalog h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .tours {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .tour-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            color: #333;
+        }
+        
+        .tour-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .tour-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .tour-header h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tour-header .location {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+        
+        .tour-body {
+            padding: 1.5rem;
+        }
+        
+        .guide-info {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 3px solid #667eea;
+        }
+        
+        .guide-info .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+        
+        .guide-info .name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.3rem;
+        }
+        
+        .guide-info .description {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        .tour-body p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .tour-footer {
+            padding: 0 1.5rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .demo-badge {
+            background: #4caf50;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .contact-btn {
+            background: #667eea;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s;
+            display: inline-block;
+        }
+        
+        .contact-btn:hover {
+            background: #5568d3;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            opacity: 0.9;
+        }
+        
+        footer a {
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,0.5);
+        }
+        
+        footer a:hover {
+            border-bottom-color: white;
         }
     </style>
 </head>
 <body>
-    <nav style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 1rem; position: fixed; top: 0; width: 100%; z-index: 1000;">
-    <div style="max-width: 1200px; margin: 0 auto; display: flex; gap: 2rem; justify-content: center;">
-        <a href="/" style="color: white; text-decoration: none; font-weight: 500;">Главная</a>
-        <a href="/guide" style="color: white; text-decoration: none; font-weight: 500;">Для гидов</a>
-    </div>
-</nav>
-    <div class="container" style="padding-top: 80px;">
-        <img src="logo.png" alt="Tourbot" style="max-width: 200px; margin-bottom: 1rem;">
+    <nav>
+        <div>
+            <a href="/">Главная</a>
+            <a href="/guide">Для гидов</a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <img src="logo.png" alt="Tourbot">
         <h1>Tourbot</h1>
-        <p>Платформа для создания аудиоэкскурсий через Telegram-ботов</p>
-        <p>Сайт в разработке</p>
-        <div class="contact">
-            <p>Для гидов: <a href="https://tourbot.online/guide">информация и тарифы</a></p>
-            <p>Новости: <a href="https://t.me/tourbot_online" targer=_blank>Телеграм-канал TourBot</a></p>
-            <p>Вопросы: <a href="https://t.me/natalia_kouz" targer=_blank>@natalia_kouz</a></p>
+        <p>Аудиоэкскурсии через Telegram-ботов</p>
+        <p style="font-size: 0.95rem;">Исследуйте города в своём ритме</p>
+    </div>
+
+    <div class="catalog">
+        <h2>Доступные экскурсии</h2>
+        
+        <div class="tours">
+            <!-- Тур 1: Avenue de Champagne -->
+            <div class="tour-card">
+                <div class="tour-header">
+                    <h3>Avenue de Champagne</h3>
+                    <div class="location">📍 Эперне, Франция</div>
+                </div>
+                <div class="tour-body">
+                    <div class="guide-info">
+                        <div class="label">Экскурсовод</div>
+                        <div class="name">Наталия Кузнецова</div>
+                        <div class="description">Создатель Tourbot, гид по винным регионам Франции</div>
+                    </div>
+                    <p>Прогулка по легендарной Аллее Шампанского — сердцу производства игристых вин. Узнайте историю знаменитых домов шампанского и откройте секреты региона.</p>
+                </div>
+                <div class="tour-footer">
+                    <span class="demo-badge">Бесплатно • DEMO</span>
+                    <a href="https://t.me/natalia_kouz" target="_blank" class="contact-btn">Получить доступ</a>
+                </div>
+            </div>
+
+            <!-- Тур 2: Земун -->
+            <div class="tour-card">
+                <div class="tour-header">
+                    <h3>Земун — город в городе</h3>
+                    <div class="location">📍 Земун (Белград), Сербия</div>
+                </div>
+                <div class="tour-body">
+                    <div class="guide-info">
+                        <div class="label">Экскурсовод</div>
+                        <div class="name">Дарья Бурцева</div>
+                        <div class="description">Гид по Белграду и Сербии, знаток истории Земуна</div>
+                    </div>
+                    <p>Исторический квартал с австро-венгерским шармом. Узкие улочки, оранжевые черепичные крыши и набережная Дуная с легендарными лебедями.</p>
+                </div>
+                <div class="tour-footer">
+                    <span class="price">Платно</span>
+                    <a href="https://t.me/dashburtseva" target="_blank" class="contact-btn">Связаться с гидом</a>
+                </div>
+            </div>
+
+            <!-- Тур 3: Кутаиси -->
+            <div class="tour-card">
+                <div class="tour-header">
+                    <h3>Кутаиси станет ближе</h3>
+                    <div class="location">📍 Кутаиси, Грузия</div>
+                </div>
+                <div class="tour-body">
+                    <div class="guide-info">
+                        <div class="label">Экскурсовод</div>
+                        <div class="name">Галина Апрышкина</div>
+                        <div class="description">Искусствовед, специалист по средневековой Грузии и винам</div>
+                    </div>
+                    <p>Древняя столица Колхиды. Королевский квартал, храм Баграти и аутентичная жизнь одного из старейших городов мира — с глазами искусствоведа.</p>
+                </div>
+                <div class="tour-footer">
+                    <span class="price">Платно</span>
+                    <a href="https://t.me/place_under_the_sun" target="_blank" class="contact-btn">Связаться с гидом</a>
+                </div>
+            </div>
         </div>
     </div>
+
+    <footer>
+        <p>Для гидов: <a href="https://tourbot.online/guide">создайте свой аудиобот</a></p>
+        <p style="margin-top: 0.5rem;">Новости: <a href="https://t.me/tourbot_online" target="_blank">Telegram-канал</a> | Вопросы: <a href="https://t.me/natalia_kouz" target="_blank">@natalia_kouz</a></p>
+    </footer>
 </body>
 </html>
