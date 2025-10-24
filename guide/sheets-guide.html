@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Инструкция по Google Sheets - Tourbot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        nav {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        nav div {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        
+        nav a:hover {
+            opacity: 0.8;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 6rem 2rem 2rem;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            background: white;
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+        }
+        
+        .section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section h3 {
+            color: #333;
+            margin: 1.5rem 0 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .section p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .placeholder {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+        
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #2196f3;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ff9800;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+        
+        code {
+            background: #f8f9fa;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        
+        table th {
+            background: #667eea;
+            color: white;
+        }
+        
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        ul li, ol li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div>
+            <a href="/">Главная</a>
+            <a href="/guide">Для гидов</a>
+            <a href="/guide/materials.html">Материалы</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>📊 Работа с Google Sheets</h1>
+            <p>Подробная инструкция по заполнению таблицы контента</p>
+        </div>
+
+        <div class="content">
+            <!-- Видеоурок -->
+            <div class="section">
+                <h2>🎥 Видеоурок</h2>
+                <p>Посмотрите пошаговую видеоинструкцию по заполнению таблицы:</p>
+                
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 1.5rem 0;">
+                    <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; border-radius: 8px;" 
+                        src="https://www.youtube.com/embed/QZq9JuM0jb8" 
+                        title="Инструкция по Google Sheets для TourBot" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- Введение -->
+            <div class="section">
+                <h2>Что такое таблица контента?</h2>
+                <p>Таблица Google Sheets — это "сценарий" вашего бота. В ней описывается вся структура экскурсии: какие сообщения, в каком порядке и с каким контентом получит турист.</p>
+                <p style="margin-top: 1rem;">Каждая строка таблицы — это один элемент контента (текст, аудио, фото, кнопка). Несколько строк с одинаковым <code>block_id</code> образуют блок, который отправляется пользователю как единое сообщение.</p>
+            </div>
+
+            <!-- Структура таблицы -->
+            <div class="section">
+                <h2>Структура таблицы</h2>
+                <p>В таблице есть следующие столбцы. <strong>Важно:</strong> заголовки столбцов изменять нельзя — по ним загружаются данные в базу.</p>
+                
+                <h3>Столбцы таблицы</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Столбец</th>
+                            <th>Описание</th>
+                            <th>Советы</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>block_id</code></td>
+                            <td>Идентификатор блока. Несколько строк с одинаковым block_id = один блок сообщений</td>
+                            <td>Только латиница и цифры, без пробелов. Примеры: <code>start</code>, <code>PushkinaStreet10</code>, <code>TrafalgarSquare</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>protected</code></td>
+                            <td>0 = доступен всем, 1 = требуется пароль</td>
+                            <td>Достаточно указать в первой строке блока</td>
+                        </tr>
+                        <tr>
+                            <td><code>order</code></td>
+                            <td>Порядок элементов внутри блока</td>
+                            <td>Нумерация с 1, без пропусков. Кнопки всегда в конце</td>
+                        </tr>
+                        <tr>
+                            <td><code>type</code></td>
+                            <td>Тип контента</td>
+                            <td><code>text</code>, <code>audio</code>, <code>image</code>, <code>document</code>, <code>location</code>, <code>button</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>text</code></td>
+                            <td>Текст сообщения или пароль</td>
+                            <td>Используется для типа <code>text</code> или пароля в кнопке <code>enter_password</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>caption</code></td>
+                            <td>Подпись к медиа или текст кнопки</td>
+                            <td>Помогает пользователю ориентироваться</td>
+                        </tr>
+                        <tr>
+                            <td><code>button_action</code></td>
+                            <td>Действие кнопки</td>
+                            <td><code>next_block</code>, <code>enter_password</code>, <code>contact_guide</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>button_target</code></td>
+                            <td>Куда ведёт кнопка</td>
+                            <td>Укажите <code>block_id</code> целевого блока</td>
+                        </tr>
+                        <tr>
+                            <td><code>latitude</code>, <code>longitude</code></td>
+                            <td>Координаты для геолокации</td>
+                            <td>Скопируйте с карты</td>
+                        </tr>
+                        <tr>
+                            <td><code>file name</code></td>
+                            <td>Имя файла медиа</td>
+                            <td>Точное имя файла: <code>05_Meeting_point.mp3</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Типы контента -->
+            <div class="section">
+                <h2>Типы контента</h2>
+                
+                <h3>text - Текстовое сообщение</h3>
+                <p>Обычное текстовое сообщение, которое получит пользователь.</p>
+                <p><strong>Заполните:</strong> столбец <code>text</code> с вашим текстом</p>
+                
+                <h3>audio - Аудиофайл</h3>
+                <p>Аудиозапись вашего рассказа. Пронумеруйте файлы по порядку и дайте понятные названия.</p>
+                <p><strong>Заполните:</strong> <code>file name</code> (например: <code>05_Meeting_point.mp3</code>), <code>caption</code> (подпись к аудио)</p>
+                
+                <h3>image - Изображение</h3>
+                <p>Фотография или иллюстрация к точке маршрута.</p>
+                <p><strong>Заполните:</strong> <code>file name</code> (например: <code>03_Cathedral.jpg</code>), <code>caption</code> (подпись к фото)</p>
+                
+                <h3>document - Документ (PDF)</h3>
+                <p>Дополнительные материалы для пользователей (карты, бонусы).</p>
+                <p><strong>Заполните:</strong> <code>file name</code> или URL, <code>caption</code></p>
+                
+                <h3>location - Геолокация</h3>
+                <p>Точка на карте, куда должен прийти пользователь.</p>
+                <p><strong>Заполните:</strong> <code>latitude</code>, <code>longitude</code> (скопируйте с Google Maps), <code>caption</code></p>
+                
+                <h3>button - Кнопка навигации</h3>
+                <p>Кнопка для перехода к следующему блоку или другого действия.</p>
+                <p><strong>Заполните:</strong></p>
+                <ul>
+                    <li><code>caption</code> - текст на кнопке (например: "Дальше", "Связаться с гидом")</li>
+                    <li><code>button_action</code>:
+                        <ul>
+                            <li><code>next_block</code> - переход к другому блоку</li>
+                            <li><code>enter_password</code> - запрос пароля</li>
+                            <li><code>contact_guide</code> - ссылка на чат с вами</li>
+                        </ul>
+                    </li>
+                    <li><code>button_target</code> - для <code>next_block</code> укажите <code>block_id</code> куда вести</li>
+                    <li><code>text</code> - для <code>enter_password</code> укажите сам пароль</li>
+                </ul>
+                <div class="warning-box">
+                    <strong>⚠️ Важно:</strong> Кнопки всегда идут в конце блока (с максимальным order_num)
+                </div>
+            </div>
+
+            <!-- Блоки -->
+            <div class="section">
+                <h2>Что такое блоки?</h2>
+                <p>Блок — это набор сообщений, которые отправляются пользователю одновременно. Например, блок может включать:</p>
+                <ul>
+                    <li>Фотографию достопримечательности</li>
+                    <li>Аудио с рассказом о ней</li>
+                    <li>Текст с дополнительной информацией</li>
+                    <li>Кнопку "Дальше" для перехода к следующей точке</li>
+                </ul>
+                
+                <p style="margin-top: 1rem;">Все эти элементы будут иметь одинаковый <code>block_id</code>, но разные <code>order</code> (порядок отправки).</p>
+                
+                <div class="info-box">
+                    <strong>💡 Совет:</strong> Начните с блока <code>start</code> (приветствие), затем <code>intro</code> (знакомство), затем точки маршрута: <code>point_1</code>, <code>point_2</code> и так далее
+                </div>
+            </div>
+
+            <!-- Примеры -->
+            <div class="section">
+                <h2>Примеры заполнения</h2>
+                
+                <h3>Пример 1: Приветственный блок</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>block_id</th>
+                            <th>protected</th>
+                            <th>order</th>
+                            <th>type</th>
+                            <th>text</th>
+                            <th>caption</th>
+                            <th>button_action</th>
+                            <th>button_target</th>
+                            <th>file name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>start</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>image</td>
+                            <td></td>
+                            <td>Добро пожаловать!</td>
+                            <td></td>
+                            <td></td>
+                            <td>01_welcome.jpg</td>
+                        </tr>
+                        <tr>
+                            <td>start</td>
+                            <td></td>
+                            <td>2</td>
+                            <td>text</td>
+                            <td>Привет! Я ваш гид...</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>start</td>
+                            <td></td>
+                            <td>3</td>
+                            <td>button</td>
+                            <td></td>
+                            <td>Начать экскурсию</td>
+                            <td>next_block</td>
+                            <td>intro</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3 style="margin-top: 2rem;">Пример 2: Точка маршрута с аудио и фото</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>block_id</th>
+                            <th>protected</th>
+                            <th>order</th>
+                            <th>type</th>
+                            <th>caption</th>
+                            <th>button_action</th>
+                            <th>button_target</th>
+                            <th>file name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>point_1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>image</td>
+                            <td>Красная площадь</td>
+                            <td></td>
+                            <td></td>
+                            <td>05_red_square.jpg</td>
+                        </tr>
+                        <tr>
+                            <td>point_1</td>
+                            <td></td>
+                            <td>2</td>
+                            <td>audio</td>
+                            <td>История площади</td>
+                            <td></td>
+                            <td></td>
+                            <td>05_red_square.mp3</td>
+                        </tr>
+                        <tr>
+                            <td>point_1</td>
+                            <td></td>
+                            <td>3</td>
+                            <td>button</td>
+                            <td>Следующая точка</td>
+                            <td>next_block</td>
+                            <td>point_2</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Медиафайлы -->
+            <div class="section">
+                <h2>Работа с медиафайлами</h2>
+                
+                <p>Перед заполнением таблицы подготовьте медиафайлы согласно требованиям:</p>
+                
+                <ul>
+                    <li><strong>Аудио:</strong> MP3, до 20 МБ, битрейт 128 kbps</li>
+                    <li><strong>Изображения:</strong> WebP, JPG, PNG — рекомендуемая ширина 800px</li>
+                    <li><strong>Документы:</strong> PDF</li>
+                </ul>
+                
+                <div class="info-box" style="margin-top: 1rem;">
+                    <strong>💡 Подробнее:</strong> Полная инструкция по подготовке и именованию медиафайлов на странице <a href="materials.html#files" style="color: #667eea;">Материалы для гидов</a>
+                </div>
+            </div>
+
+            <!-- Частые ошибки -->
+            <div class="section">
+                <h2>⚠️ Частые ошибки</h2>
+                
+                <ul>
+                    <li><strong>Кириллица в названиях файлов</strong> — используйте только латиницу</li>
+                    <li><strong>Пробелы в названиях</strong> — замените на подчёркивание: <code>red_square.jpg</code></li>
+                    <li><strong>Повторяющиеся order внутри блока</strong> — проверьте, что нумерация идёт подряд: 1, 2, 3...</li>
+                    <li><strong>Кнопки в середине блока</strong> — кнопки всегда должны быть последними (максимальный order)</li>
+                    <li><strong>Неправильный block_id в button_target</strong> — убедитесь, что блок с таким id существует</li>
+                    <li><strong>Забыли указать protected=1 для защищённых блоков</strong> — проверьте первую строку каждого блока</li>
+                    <li><strong>Точное имя файла не совпадает</strong> — скопируйте имя файла полностью, включая расширение</li>
+                </ul>
+                
+                <div class="info-box" style="margin-top: 1.5rem;">
+                    <strong>💡 Совет:</strong> После заполнения таблицы проверьте её построчно. Убедитесь, что все block_id корректны, файлы названы правильно, а кнопки ведут на существующие блоки
+                </div>
+            </div>
+
+            <!-- Шаблон -->
+            <div class="section">
+                <h2>📋 Скачать шаблон</h2>
+                <p>Используйте готовый шаблон для создания структуры своей экскурсии:</p>
+                <p style="margin-top: 1rem;">
+                    <a href="https://docs.google.com/spreadsheets/d/1C1xrA6frXqyOhRw7Hmr6iFlNjJ1_TA46Em3J8gBpFuM/edit?usp=drive_link" target="_blank" style="display: inline-block; background: #667eea; color: white; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 500; margin-right: 1rem;">
+                        📋 Открыть шаблон (пустой)
+                    </a>
+                    <a href="https://docs.google.com/spreadsheets/d/1AqWxY5qz33BXjQU9eN7_o4JUYmnoFID_ilATAp8Ryyc/edit?usp=sharing" target="_blank" style="display: inline-block; background: #764ba2; color: white; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 500;">
+                        📝 Открыть образец (заполненный)
+                    </a>
+                </p>
+                <div class="info-box" style="margin-top: 1.5rem;">
+                    <strong>💡 Совет:</strong> Откройте шаблон и нажмите <strong>Файл → Создать копию</strong>, чтобы таблица появилась в вашем Google Drive
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
