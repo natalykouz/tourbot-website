@@ -139,15 +139,13 @@
             width: 100%;
             border-collapse: collapse;
             margin: 1rem 0;
-            display: block;
-            overflow-x: auto;
-            white-space: nowrap;
         }
         
         table th, table td {
             border: 1px solid #ddd;
             padding: 0.75rem;
             text-align: left;
+            word-wrap: break-word;
         }
         
         table th {
@@ -209,6 +207,7 @@
                 <p>В таблице есть следующие столбцы. <strong>Важно:</strong> заголовки столбцов изменять нельзя — по ним загружаются данные в базу.</p>
                 
                 <h3>Столбцы таблицы</h3>
+                <div style="overflow-x: auto;">
                 <table>
                     <thead>
                         <tr>
@@ -270,6 +269,7 @@
                         </tr>
                     </tbody>
                 </table>
+                </div>
             </div>
 
             <!-- Типы контента -->
@@ -362,6 +362,7 @@
                 <h2>Примеры заполнения</h2>
                 
                 <h3>Пример 1: Приветственный блок</h3>
+                <div style="overflow-x: auto;">
                 <table>
                     <thead>
                         <tr>
@@ -411,9 +412,10 @@
                             <td></td>
                         </tr>
                     </tbody>
-                </table>
+                </table></div>
                 
                 <h3 style="margin-top: 2rem;">Пример 2: Точка маршрута с аудио и фото</h3>
+                <div style="overflow-x: auto;">
                 <table>
                     <thead>
                         <tr>
@@ -459,7 +461,7 @@
                             <td></td>
                         </tr>
                     </tbody>
-                </table>
+                </table></div>
             </div>
 
             <!-- Медиафайлы -->
@@ -486,7 +488,7 @@
                 <ul>
                     <li><strong>Кириллица в названиях файлов</strong> — используйте только латиницу</li>
                     <li><strong>Пробелы в названиях</strong> — замените на подчёркивание: <code>red_square.jpg</code></li>
-                    <li><strong>Повторяющиеся order внутри блока</strong> — проверьте, что нумерация идёт подряд: 1, 2, 3...</li>
+                    <li><strong>Повторяющиеся order внутри блока</strong> — проверьте, что нумерация идёт подряд: 1, 2, 3..., за исключением группировки картиной в галерею и кнопок в один ряд</li>
                     <li><strong>Кнопки в середине блока</strong> — кнопки всегда должны быть последними (максимальный order)</li>
                     <li><strong>Неправильный block_id в button_target</strong> — убедитесь, что блок с таким id существует</li>
                     <li><strong>Забыли указать protected=1 для защищённых блоков</strong> — проверьте первую строку каждого блока</li>
