@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="icon" href="/favicon.ico"> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Материалы для гидов - Tourbot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        nav {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        nav div {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        
+        nav a:hover {
+            opacity: 0.8;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 6rem 2rem 2rem;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            background: white;
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+        }
+        
+        .section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .video-placeholder {
+            background: #f8f9fa;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 3rem;
+            text-align: center;
+            color: #999;
+            margin: 1rem 0;
+        }
+        
+        .doc-link {
+            display: block;
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #667eea;
+            margin: 0.5rem 0;
+            transition: background 0.3s;
+        }
+        
+        .doc-link:hover {
+            background: #e9ecef;
+        }
+        
+        .steps {
+            counter-reset: step;
+        }
+        
+        .step {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .placeholder {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div>
+            <a href="/">Главная</a>
+            <a href="/guide">Для гидов</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>📚 Материалы для гидов</h1>
+            <p>Всё необходимое для создания вашего аудиобота</p>
+        </div>
+
+        <div class="content">
+            <!-- Быстрый старт -->
+            <div class="section">
+                <h2>🚀 Быстрый старт</h2>
+                <p>Процесс создания вашего аудиобота занимает 3-5 дней и состоит из простых шагов:</p>
+                
+                <div class="steps">
+                    <div class="step">
+                        <strong><a href="#registration" style="color: #667eea; text-decoration: none;">Регистрация бота</a></strong>
+                        <p>Создайте бота через @BotFather и отправьте мне токен и ваш ID</p>
+                    </div>
+                    <div class="step">
+                        <strong>[Заголовок шага 2]</strong>
+                        <p>Описание второго шага...</p>
+                    </div>
+                    <div class="step">
+                        <strong>[Заголовок шага 3]</strong>
+                        <p>Описание третьего шага...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Регистрация бота -->
+            <div class="section" id="registration">
+                <h2>🤖 Регистрация бота</h2>
+                <p>Первый шаг — создать своего Telegram-бота. Это делается через специального бота @BotFather.</p>
+                
+                <div class="steps">
+                    <div class="step">
+                        <strong>Откройте @BotFather</strong>
+                        <p>В Telegram найдите и откройте бота <a href="https://t.me/BotFather" target="_blank" style="color: #667eea;">@BotFather</a> (с синей галочкой — это официальный бот)</p>
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Создайте бота</strong>
+                        <p>Отправьте команду: <code style="background: #f8f9fa; padding: 0.2rem 0.5rem; border-radius: 4px;">/newbot</code></p>
+                        <p style="margin-top: 0.5rem;">BotFather попросит указать:</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li><strong>Название бота</strong> — любое, например: "Экскурсия по Тбилиси"</li>
+                            <li><strong>Username бота</strong> — должен заканчиваться на "bot", например: <code style="background: #f8f9fa; padding: 0.2rem 0.5rem;">tbilisi_tour_bot</code></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Скопируйте токен</strong>
+                        <p>BotFather пришлёт вам сообщение с токеном — это длинная строка вида:</p>
+                        <p style="background: #f8f9fa; padding: 1rem; border-radius: 4px; font-family: monospace; margin: 0.5rem 0;">1234567890:ABCdefGHIjklMNOpqrsTUVwxyz</p>
+                        <p><strong>⚠️ Важно:</strong> Скопируйте токен полностью, включая все символы и двоеточие. Никому не показывайте этот токен, кроме меня.</p>
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Узнайте ваш Telegram ID</strong>
+                        <p>Откройте бота <a href="https://t.me/userinfobot" target="_blank" style="color: #667eea;">@userinfobot</a> и нажмите START</p>
+                        <p style="margin-top: 0.5rem;">Бот пришлёт вам сообщение с вашим ID — это число вида: <code style="background: #f8f9fa; padding: 0.2rem 0.5rem;">123456789</code></p>
+                        <p style="margin-top: 0.5rem;">Скопируйте это число — это ваш <strong>Telegram ID</strong>.</p>
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Отправьте мне данные</strong>
+                        <p>Напишите мне в <a href="https://t.me/natalia_kouz" target="_blank" style="color: #667eea;">@natalia_kouz</a> следующую информацию:</p>
+                        <div style="background: #f8f9fa; padding: 1rem; border-radius: 4px; margin: 0.5rem 0;">
+                            <p style="margin: 0.25rem 0;"><strong>Username бота:</strong> @ваш_бот</p>
+                            <p style="margin: 0.25rem 0;"><strong>Токен:</strong> [вставьте токен полностью]</p>
+                            <p style="margin: 0.25rem 0;"><strong>Ваш Telegram ID:</strong> [ваше число]</p>
+                            <p style="margin: 0.25rem 0;"><strong>Ваше имя для сайта:</strong> Имя Фамилия</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: #e7f3ff; border-left: 4px solid #2196f3; padding: 1rem; margin: 1.5rem 0; border-radius: 4px;">
+                    <strong>💡 Совет:</strong> Username бота лучше выбирать связанным с названием экскурсии, чтобы туристам было понятно. Например: <code>paris_walk_bot</code>, <code>rome_audio_guide_bot</code>
+                </div>
+            </div>
+
+            <!-- Быстрый старт -->
+            <div class="section">
+                <h2>🚀 Быстрый старт</h2>
+                <div class="placeholder">
+                    <strong>📝 Контент будет добавлен:</strong> Краткое описание процесса создания бота от заявки до запуска
+                </div>
+                
+                <div class="steps">
+                    <div class="step">
+                        <strong>[Заголовок шага 1]</strong>
+                        <p>Описание первого шага...</p>
+                    </div>
+                    <div class="step">
+                        <strong>[Заголовок шага 2]</strong>
+                        <p>Описание второго шага...</p>
+                    </div>
+                    <div class="step">
+                        <strong>[Заголовок шага 3]</strong>
+                        <p>Описание третьего шага...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Видеоурок -->
+            <div class="section">
+                <h2>🎥 Видеоурок</h2>
+                <div class="placeholder">
+                    <strong>📝 Контент будет добавлен:</strong> Введение к видео
+                </div>
+                
+                <div class="video-placeholder">
+                    <p style="font-size: 3rem; margin-bottom: 1rem;">▶️</p>
+                    <p><strong>[Место для видео]</strong></p>
+                    <p>YouTube или другая платформа</p>
+                </div>
+            </div>
+
+            <!-- Инструкция по таблице -->
+            <div class="section">
+                <h2>📊 Работа с Google Sheets</h2>
+                <div class="placeholder">
+                    <strong>📝 Контент будет добавлен:</strong> Подробная инструкция по заполнению таблицы контента
+                </div>
+                
+                <h3 style="margin-top: 1.5rem; color: #333;">Структура таблицы</h3>
+                <p>[Описание столбцов и их назначение]</p>
+                
+                <h3 style="margin-top: 1.5rem; color: #333;">Примеры заполнения</h3>
+                <p>[Примеры разных типов контента]</p>
+            </div>
+
+            <!-- Шаблоны и примеры -->
+            <div class="section">
+                <h2>📄 Шаблоны и документы</h2>
+                <div class="placeholder">
+                    <strong>📝 Контент будет добавлен:</strong> Ссылки на шаблоны и примеры
+                </div>
+                
+                <a href="#" class="doc-link">
+                    📋 Шаблон Google Sheets для контента
+                </a>
+                <a href="#" class="doc-link">
+                    📝 Пример заполненной таблицы
+                </a>
+                <a href="#" class="doc-link">
+                    🎨 Рекомендации по оформлению медиафайлов
+                </a>
+            </div>
+
+            <!-- FAQ -->
+            <div class="section">
+                <h2>❓ Частые вопросы</h2>
+                <div class="placeholder">
+                    <strong>📝 Контент будет добавлен:</strong> Список частых вопросов и ответов
+                </div>
+                
+                <details style="margin: 1rem 0; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+                    <summary style="cursor: pointer; font-weight: 600;">Вопрос 1?</summary>
+                    <p style="margin-top: 1rem; color: #666;">Ответ на вопрос...</p>
+                </details>
+                
+                <details style="margin: 1rem 0; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+                    <summary style="cursor: pointer; font-weight: 600;">Вопрос 2?</summary>
+                    <p style="margin-top: 1rem; color: #666;">Ответ на вопрос...</p>
+                </details>
+            </div>
+
+            <!-- Контакты -->
+            <div class="section">
+                <h2>💬 Нужна помощь?</h2>
+                <p>Если у вас остались вопросы или нужна консультация:</p>
+                <p style="margin-top: 1rem;">
+                    <strong>Telegram:</strong> <a href="https://t.me/natalia_kouz" target="_blank" style="color: #667eea;">@natalia_kouz</a><br>
+                    <strong>Email:</strong> <a href="mailto:nataly.kouz@gmail.com" style="color: #667eea;">nataly.kouz@gmail.com</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
