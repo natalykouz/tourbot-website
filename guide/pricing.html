@@ -90,7 +90,7 @@
         .pricing-table {
             background: rgba(255,255,255,0.95);
             border-radius: 12px;
-            overflow-х: auto;
+            overflow-x: auto;
             margin-bottom: 2rem;
             color: #333;
         }
@@ -98,7 +98,6 @@
         .pricing-table table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 600px;
         }
         
         .pricing-table th {
@@ -281,6 +280,26 @@
             
             nav div {
                 gap: 1rem;
+            }
+            
+            /* Адаптация таблицы для мобильных */
+            .pricing-table {
+                overflow-x: visible;
+            }
+            
+            .pricing-table table {
+                min-width: auto;
+                font-size: 0.85rem;
+            }
+            
+            .pricing-table th,
+            .pricing-table td {
+                padding: 0.7rem 0.5rem;
+            }
+            
+            .pricing-table td:first-child {
+                font-size: 0.8rem;
+                width: 35%;
             }
         }
     </style>
