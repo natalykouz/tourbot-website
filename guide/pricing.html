@@ -4,20 +4,20 @@
     <link rel="icon" href="/favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Тарифы TourBot – создавайте аудиоэкскурсии в Telegram. План A: код в собственность за €150. План B: подписка €15/мес">
+    <meta name="description" content="Тарифы TourBot – создавайте аудиоэкскурсии в Telegram. По факту: €1 за активацию. Подписка: €15/мес">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://tourbot.online/pricing">
     <meta property="og:title" content="Тарифы — TourBot">
-    <meta property="og:description" content="Тарифы TourBot – создавайте аудиоэкскурсии в Telegram. План A: код в собственность за €150. План B: подписка €15/мес">
+    <meta property="og:description" content="Тарифы TourBot – создавайте аудиоэкскурсии в Telegram. По факту: €1 за активацию. Подписка: €15/мес">
     <meta property="og:image" content="https://tourbot.online/logo.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://tourbot.online/pricing">
     <meta property="twitter:title" content="Тарифы — TourBot">
-    <meta property="twitter:description" content="Тарифы TourBot – создавайте аудиоэкскурсии в Telegram. План A: код в собственность за €150. План B: подписка €15/мес">
+    <meta property="twitter:description" content="Тарифы TourBot – создавайте аудиоэкскурсии в Telegram. По факту: €1 за активацию. Подписка: €15/мес">
     <meta property="twitter:image" content="https://tourbot.online/logo.png">
     
     <title>Тарифы — Tourbot</title>
@@ -122,40 +122,6 @@
             color: #667eea;
         }
         
-        .pricing-table .highlight {
-            background: #fff9e6;
-        }
-        
-        .early-bird {
-            background: #e8f5e9;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin: 2rem 0;
-            text-align: center;
-        }
-        
-        .early-bird h3 {
-            color: #2e7d32;
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .early-bird p {
-            color: #1b5e20;
-            font-size: 1.1rem;
-        }
-        
-        .early-bird .price-old {
-            text-decoration: line-through;
-            opacity: 0.6;
-        }
-        
-        .early-bird .price-new {
-            font-weight: bold;
-            font-size: 1.3rem;
-            color: #1b5e20;
-        }
-        
         .section {
             background: rgba(255,255,255,0.95);
             border-radius: 12px;
@@ -175,6 +141,10 @@
             margin: 1.5rem 0 1rem;
             font-size: 1.3rem;
         }
+
+        .section h3:first-of-type {
+            margin-top: 0;
+        }
         
         .section p, .section li {
             line-height: 1.6;
@@ -187,24 +157,6 @@
             margin-bottom: 1rem;
         }
         
-        .discount-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1rem 0;
-        }
-        
-        .discount-table th, .discount-table td {
-            border: 1px solid #ddd;
-            padding: 0.75rem;
-            text-align: left;
-        }
-        
-        .discount-table th {
-            background: #f5f5f5;
-            font-weight: 600;
-            color: #667eea;
-        }
-        
         .info-box {
             background: #e3f2fd;
             border-left: 4px solid #2196f3;
@@ -215,6 +167,10 @@
         
         .info-box strong {
             color: #1976d2;
+        }
+
+        .info-box p {
+            margin-bottom: 0;
         }
         
         .cta-section {
@@ -281,7 +237,6 @@
                 gap: 1rem;
             }
             
-            /* Адаптация таблицы для мобильных */
             .pricing-table {
                 overflow-x: visible;
             }
@@ -314,7 +269,7 @@
 
     <div class="hero">
         <h1>💰 Тарифы</h1>
-        <p>Выберите подходящий план для вашей экскурсии</p>
+        <p>Платите только тогда, когда тур работает</p>
     </div>
 
     <div class="content">
@@ -323,32 +278,27 @@
             <table>
                 <tr>
                     <th></th>
-                    <th>Plan A: Сборка</th>
-                    <th>Plan B: Подписка</th>
+                    <th>По факту</th>
+                    <th>Подписка</th>
                 </tr>
                 <tr>
                     <td>Стоимость</td>
-                    <td>€150 одноразово</td>
+                    <td>€1 за активацию тура</td>
                     <td>€15/месяц</td>
                 </tr>
                 <tr>
-                    <td>Владение ботом</td>
-                    <td>Навсегда твой</td>
-                    <td>Аренда (выкуп +€150/€50)</td>
-                </tr>
-                <tr>
-                    <td>Размещение в сети (хостинг)</td>
-                    <td>Опционально +€5/мес</td>
+                    <td>Хостинг</td>
+                    <td>Включён</td>
                     <td>Включён</td>
                 </tr>
                 <tr>
                     <td>Поддержка</td>
-                    <td>Включена в хостинг</td>
-                    <td>Всё время подписки</td>
+                    <td>Включена</td>
+                    <td>Включена</td>
                 </tr>
                 <tr>
                     <td>Обновления кода</td>
-                    <td>Включены в хостинг</td>
+                    <td>Включены</td>
                     <td>Включены</td>
                 </tr>
                 <tr>
@@ -361,28 +311,28 @@
 
         <!-- Что входит -->
         <div class="section">
-            <h2>📦 Что входит в стоимость</h2>
-            
-            <h3>Plan A: Сборка</h3>
-            <ul>
-                <li>Готовый код бота + база данных</li>
-                <li>Документация</li>
-            </ul>
-            
+            <h2>📦 Как это работает</h2>
+
+            <h3>По факту</h3>
+            <p>Вы пополняете баланс заранее — €1 списывается каждый раз, когда турист вводит пароль и получает доступ к туру. Нет туристов — деньги не списываются. Если баланс заканчивается, бот приостанавливается до следующего пополнения.</p>
             <div class="info-box">
-                <strong>Опция хостинга:</strong> €5/мес за каждого бота на нашем хостинге. Включает обновления кода и техническую поддержку.<br><br>
+                <p><strong>Заморозка:</strong>если в течение 4 месяцев не было ни одной активации, бот автоматически отключается. Для возобновления нужно выбрать тариф заново — с новым 4-месячным периодом.</p>
             </div>
 
-            <h3>Plan B: Подписка</h3>
-            <ul>
-                <li>Сборка + хостинг + поддержка</li>
-                <li>Все обновления включены</li>
-                <li>Всё работает "из коробки"</li>
-            </ul>
-            
+            <h3>Подписка</h3>
+            <p>Фиксированная оплата €15 в месяц — количество активаций не ограничено. Оплата помесячно вперёд.</p>
             <div class="info-box">
-                <strong>Выкуп кода:</strong> В первый год €150, после года €50, перезапуск после паузы (месяц и более) €15
+                <p><strong>Первый месяц в подарок</strong> — при условии размещения упоминания TourBot в профиле бота и публикации поста о запуске. Детали фиксируются в договоре.</p>
             </div>
+
+            <h3>Смена тарифа</h3>
+            <p>Тариф выбирается минимум на 4 месяца. Перейти на другой можно в любой момент после этого срока — с уведомлением не менее чем за месяц до смены.</p>
+        </div>
+
+        <!-- Выкуп кода -->
+        <div class="section">
+            <h2>🔑 Выкуп кода</h2>
+            <p>Независимо от выбранного тарифа, вы можете в любой момент выкупить код бота за €150 и разместить его на собственном хостинге. Документация включена.</p>
         </div>
 
         <!-- Дополнительные услуги -->
@@ -391,27 +341,30 @@
             <ul>
                 <li><strong>Подготовка структуры</strong> на основе вашей методички: от €150</li>
                 <li><strong>Генерация аудиодорожки на иностранных языках</strong> вашим голосом (дубляж): от €150</li>
-                <li><strong>Content Consulting</strong> (помощь в создании контента): €60/час</li>
+                <li><strong>Методическая помощь в создании контента</strong>: €60/час</li>
             </ul>
         </div>
 
-        <!-- Условия применения тарифов -->
+        <!-- Условия -->
         <div class="section">
-            <h2>📋 Условия применения тарифов</h2>
-            
-            <h3>Plan A: Сборка</h3>
+            <h2>📋 Условия подключения</h2>
+
+            <h3>По факту</h3>
             <ul>
-                <li>Оплата 50% сразу, 50% после тестирования</li>
-                <li>Код передаётся после полной оплаты. Вы можете запускать его на собственном компьютере или разместить на подходящем хостинге</li>
-                <li>Сроки работы: 2-3 рабочих дня при наличии всех материалов</li>
+                <li>Бот собирается после первого пополнения баланса</li>
+                <li>Сроки: 2–3 рабочих дня при наличии всех материалов</li>
+                <li>Минимальное пополнение — €5</li>
             </ul>
 
-            <h3>Plan B: Подписка</h3>
+            <h3>Подписка</h3>
             <ul>
-                <li>Сборка бота после оплаты 1-го месяца</li>
-                <li>Сроки работы: 2-3 рабочих дня при наличии всех материалов</li>
-                <li>Задержки возможны только при непредоставлении нужных материалов</li>
+                <li>Бот собирается после оплаты первого месяца (или подтверждения маркетингового условия для бесплатного месяца)</li>
+                <li>Сроки: 2–3 рабочих дня при наличии всех материалов</li>
             </ul>
+
+            <div class="info-box">
+                <p><strong>С каждым гидом заключается рамочный договор</strong>, в котором фиксируются тариф, период и дополнительные условия.</p>
+            </div>
         </div>
 
         <!-- CTA -->
@@ -423,8 +376,8 @@
     </div>
 
     <footer>
-        <p>Новости: <a href="https://t.me/tourbot_online" target="_blank">Telegram-канал</a> | Вопросы: <a href="https://t.me/natalia_kouz?text=У%20меня%вопрос%по%20тарифам%20Tourbot" target="_blank">@natalia_kouz</a></p>
-        <p style="margin-top: 0.5rem; opacity: 0.8;">Все цены указаны в EUR | Обновлено: 24 февраля 2026</p>
+        <p>Новости: <a href="https://t.me/tourbot_online" target="_blank">Telegram-канал</a> | Вопросы: <a href="https://t.me/natalia_kouz?text=У%20меня%20вопрос%20по%20тарифам%20Tourbot" target="_blank">@natalia_kouz</a></p>
+        <p style="margin-top: 0.5rem; opacity: 0.8;">Все цены указаны в EUR | Обновлено: апрель 2026</p>
     </footer>
 </body>
 </html>
