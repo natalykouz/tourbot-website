@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="icon" href="/favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TourBot Offline — бронирование живых туров через Telegram</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+
+        nav {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav div {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover { opacity: 0.8; }
+
+        .header {
+            text-align: center;
+            padding: 8rem 2rem 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.4);
+            border-radius: 20px;
+            padding: 0.3rem 1rem;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .header h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .header p { font-size: 1.2rem; opacity: 0.9; }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .content-box {
+            background: rgba(255,255,255,0.95);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        h2 { color: #667eea; margin-bottom: 1.5rem; font-size: 1.8rem; }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .feature {
+            padding: 1.2rem 1.2rem 1.2rem 1.5rem;
+            border-left: 3px solid #667eea;
+            background: #f8f7ff;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .feature h3 { color: #764ba2; margin-bottom: 0.4rem; font-size: 1.05rem; }
+        .feature p { color: #555; line-height: 1.55; font-size: 0.95rem; }
+
+        /* HOW IT WORKS */
+        .steps { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+        .step {
+            flex: 1;
+            min-width: 180px;
+            text-align: center;
+            padding: 1.2rem;
+            background: #f8f7ff;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .step-num {
+            width: 36px; height: 36px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-weight: 700; font-size: 0.9rem;
+            margin: 0 auto 0.8rem;
+        }
+
+        .step h3 { color: #764ba2; font-size: 0.95rem; margin-bottom: 0.4rem; }
+        .step p { color: #666; font-size: 0.88rem; line-height: 1.5; }
+
+        /* PRICING */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .plan {
+            border: 2px solid #e8e4ff;
+            border-radius: 12px;
+            padding: 1.5rem 1.2rem;
+            background: white;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .plan:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(102,126,234,0.15);
+        }
+
+        .plan.featured {
+            border-color: #667eea;
+            background: linear-gradient(180deg, #f0eeff 0%, white 100%);
+        }
+
+        .plan-badge {
+            position: absolute;
+            top: -12px; left: 50%; transform: translateX(-50%);
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .plan-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.3rem;
+        }
+
+        .plan-limit {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 1rem;
+        }
+
+        .plan-prices {
+            margin-bottom: 1rem;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.4rem 0;
+            border-bottom: 1px solid #f0eeff;
+            font-size: 0.88rem;
+        }
+
+        .price-row:last-child { border-bottom: none; }
+
+        .price-label { color: #666; font-size: 0.8rem; }
+
+        .price-val {
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .price-val.free { color: #48bb78; }
+
+        .plan-features {
+            list-style: none;
+            margin-top: 0.8rem;
+        }
+
+        .plan-features li {
+            font-size: 0.82rem;
+            color: #555;
+            padding: 0.25rem 0;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .plan-features li::before {
+            content: '✓';
+            position: absolute; left: 0;
+            color: #667eea;
+            font-weight: 700;
+        }
+
+        /* TRIBUTE EXPLANATION */
+        .tribute-box {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .tribute-box h2 { color: white; margin-bottom: 1rem; font-size: 1.4rem; }
+
+        .tribute-row {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tribute-card {
+            flex: 1;
+            min-width: 220px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 10px;
+            padding: 1.2rem;
+        }
+
+        .tribute-card h3 { font-size: 1rem; margin-bottom: 0.5rem; }
+        .tribute-card p { font-size: 0.88rem; opacity: 0.88; line-height: 1.5; }
+
+        /* ANALOGY */
+        .analogy-box {
+            background: #f8f7ff;
+            border-left: 4px solid #667eea;
+            border-radius: 0 10px 10px 0;
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0;
+            color: #444;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        /* CTA */
+        .contact-section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            color: #333;
+            margin-bottom: 2rem;
+        }
+
+        .contact-section h3 { color: #667eea; margin-bottom: 0.5rem; font-size: 1.4rem; }
+        .contact-section p { color: #555; margin-bottom: 1.5rem; }
+
+        .btn {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .btn:hover { background: #f0f0f0; transform: translateY(-2px); }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover { opacity: 0.9; background: linear-gradient(135deg, #667eea, #764ba2); }
+
+        .footer-link {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .footer-link a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            border-bottom: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .footer-link a:hover { opacity: 1; border-bottom-color: white; }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2rem; }
+            nav div { gap: 1rem; }
+            .pricing-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 500px) {
+            .pricing-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div>
+        <a href="/">Главная</a>
+        <a href="/guide">TourBot Online</a>
+        <a href="#">TourBot Offline</a>
+    </div>
+</nav>
+
+<div class="header">
+    <div class="badge">🆕 Новый продукт</div>
+    <h1>TourBot Offline</h1>
+    <p>Бронирование живых туров и экскурсий через Telegram — без переписки и ручной обработки</p>
+</div>
+
+<div class="container">
+
+    <!-- КАК ЭТО РАБОТАЕТ -->
+    <div class="content-box">
+        <h2>Как это работает</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <h3>Клиент открывает бота</h3>
+                <p>Вы даёте ссылку в соцсетях, на сайте или в переписке</p>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <h3>Выбирает тур и дату</h3>
+                <p>Видит доступные места и цены в реальном времени</p>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <h3>Оплачивает онлайн</h3>
+                <p>Любой картой — российской, грузинской, международной</p>
+            </div>
+            <div class="step">
+                <div class="step-num">4</div>
+                <h3>Бронь подтверждена</h3>
+                <p>Вы получаете уведомление. Без звонков и переписки</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ВОЗМОЖНОСТИ -->
+    <div class="content-box">
+        <h2>Что умеет платформа</h2>
+        <div class="features-grid">
+            <div class="feature">
+                <h3>Управление расписанием</h3>
+                <p>Добавляйте даты, устанавливайте количество мест — бот автоматически закрывает проданные слоты</p>
+            </div>
+            <div class="feature">
+                <h3>Онлайн-оплата через Tribute</h3>
+                <p>Принимайте предоплату картой. Работает с картами любых банков — российских, грузинских, международных</p>
+            </div>
+            <div class="feature">
+                <h3>Несколько гидов</h3>
+                <p>Агентства могут вести до 5 гидов в одном аккаунте с общим административным доступом</p>
+            </div>
+            <div class="feature">
+                <h3>Свой брендовый бот</h3>
+                <p>Enterprise-клиенты получают собственного бота с названием агентства — как сайт без чужой подписи</p>
+            </div>
+            <div class="feature">
+                <h3>Уведомления</h3>
+                <p>Вы и клиент получаете подтверждение брони сразу после оплаты</p>
+            </div>
+            <div class="feature">
+                <h3>Без лишних приложений</h3>
+                <p>Клиенту достаточно Telegram — никакой регистрации и установки дополнительного ПО</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ТАРИФЫ -->
+    <div class="content-box">
+        <h2>Тарифы</h2>
+
+        <div class="analogy-box">
+            Как мастер маникюра с dikidi-ссылкой — клиенты сами записываются, вы только работаете. Работаете через общего бота — продвигаете платформу, платите меньше. Хотите свой бот <strong>@YourAgency_bot</strong> без упоминания TourBot — как сайт без плашки «сделано на Tilda» — это Enterprise.
+        </div>
+
+        <div class="pricing-grid">
+
+            <div class="plan">
+                <div class="plan-name">Free</div>
+                <div class="plan-limit">до 5 броней / мес</div>
+                <div class="plan-prices">
+                    <div class="price-row">
+                        <span class="price-label">всегда</span>
+                        <span class="price-val free">€0</span>
+                    </div>
+                </div>
+                <ul class="plan-features">
+                    <li>Полный функционал</li>
+                    <li>Идеально для старта</li>
+                    <li>Без карты</li>
+                </ul>
+            </div>
+
+            <div class="plan">
+                <div class="plan-name">Solo</div>
+                <div class="plan-limit">1 гид, без лимита броней</div>
+                <div class="plan-prices">
+                    <div class="price-row">
+                        <span class="price-label">предоплата ≥ 25%</span>
+                        <span class="price-val">€9 / мес</span>
+                    </div>
+                    <div class="price-row">
+                        <span class="price-label">без предоплаты</span>
+                        <span class="price-val">€19 / мес</span>
+                    </div>
+                </div>
+                <ul class="plan-features">
+                    <li>Один гид</li>
+                    <li>Онлайн-оплата Tribute</li>
+                    <li>Уведомления о бронях</li>
+                </ul>
+            </div>
+
+            <div class="plan featured">
+                <div class="plan-badge">👥 Для агентств</div>
+                <div class="plan-name">Agency</div>
+                <div class="plan-limit">до 5 гидов</div>
+                <div class="plan-prices">
+                    <div class="price-row">
+                        <span class="price-label">предоплата ≥ 25%</span>
+                        <span class="price-val">€29 / мес</span>
+                    </div>
+                    <div class="price-row">
+                        <span class="price-label">без предоплаты</span>
+                        <span class="price-val">€49 / мес</span>
+                    </div>
+                </div>
+                <ul class="plan-features">
+                    <li>До 5 гидов</li>
+                    <li>Единый admin-доступ</li>
+                    <li>Общий календарь</li>
+                    <li>Онлайн-оплата Tribute</li>
+                </ul>
+            </div>
+
+            <div class="plan">
+                <div class="plan-name">Enterprise</div>
+                <div class="plan-limit">5+ гидов, свой бот</div>
+                <div class="plan-prices">
+                    <div class="price-row">
+                        <span class="price-label">предоплата ≥ 25%</span>
+                        <span class="price-val">€59 / мес</span>
+                    </div>
+                    <div class="price-row">
+                        <span class="price-label">без предоплаты</span>
+                        <span class="price-val">€89 / мес</span>
+                    </div>
+                </div>
+                <ul class="plan-features">
+                    <li>Свой бот @YourAgency</li>
+                    <li>Отдельная база данных</li>
+                    <li>Неограниченно гидов</li>
+                    <li>Приоритетная поддержка</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ПОЧЕМУ ДЕШЕВЛЕ С ПРЕДОПЛАТОЙ -->
+    <div class="tribute-box">
+        <h2>Почему предоплата снижает стоимость подписки?</h2>
+        <div class="tribute-row">
+            <div class="tribute-card">
+                <h3>💳 Tribute платит нам бонус</h3>
+                <p>Когда клиент оплачивает тур через платформу, Tribute начисляет нам реферальное вознаграждение. Мы делимся им с вами в виде скидки на подписку.</p>
+            </div>
+            <div class="tribute-card">
+                <h3>🌍 Принимает любые карты</h3>
+                <p>Российские, грузинские, международные Visa/Mastercard. Работает там, где работает ваш бизнес.</p>
+            </div>
+            <div class="tribute-card">
+                <h3>🔢 Считаем честно</h3>
+                <p>Tribute берёт 10% от суммы предоплаты. При предоплате 25% реальная нагрузка — 2.5% с оборота. Экономия на подписке перекрывает её при обороте до ~€1 600 / мес.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="contact-section">
+        <h3>Хотите подключиться?</h3>
+        <p>Расскажите о вашем проекте — подберём подходящий тариф и настроим бота</p>
+        <a href="https://t.me/natalia_kouz" target="_blank" class="btn btn-primary">Написать в Telegram</a>
+    </div>
+
+    <div class="footer-link">
+        <a href="/guide/offer">Публичная оферта</a>
+    </div>
+
+</div>
+</body>
+</html>
