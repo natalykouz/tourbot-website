@@ -1,5 +1,7 @@
+<!DOCTYPE html>
+<html lang="ru">
 <head>
-    <link rel="icon" href="/favicon.ico"> 
+    <link rel="icon" href="/favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Материалы для гидов - Tourbot</title>
@@ -9,7 +11,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
@@ -17,7 +19,7 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
         }
-        
+
         nav {
             background: rgba(255,255,255,0.1);
             backdrop-filter: blur(10px);
@@ -27,7 +29,7 @@
             width: 100%;
             z-index: 1000;
         }
-        
+
         nav div {
             max-width: 1200px;
             margin: 0 auto;
@@ -35,55 +37,55 @@
             gap: 2rem;
             justify-content: center;
         }
-        
+
         nav a {
             color: white;
             text-decoration: none;
             font-weight: 500;
             transition: opacity 0.3s;
         }
-        
+
         nav a:hover {
             opacity: 0.8;
         }
-        
+
         .container {
             max-width: 900px;
             margin: 0 auto;
             padding: 6rem 2rem 2rem;
         }
-        
+
         .header {
             text-align: center;
             color: white;
             margin-bottom: 3rem;
         }
-        
+
         .header h1 {
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
         }
-        
+
         .header p {
             font-size: 1.1rem;
             opacity: 0.9;
         }
-        
+
         .content {
             background: white;
             border-radius: 12px;
             padding: 3rem;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
-        
+
         .section {
             margin-bottom: 3rem;
         }
-        
+
         .section:last-child {
             margin-bottom: 0;
         }
-        
+
         .section h2 {
             color: #667eea;
             margin-bottom: 1rem;
@@ -91,47 +93,30 @@
             border-bottom: 2px solid #eee;
             padding-bottom: 0.5rem;
         }
-        
+
+        .section h3 {
+            color: #333;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
         .section p {
             color: #666;
             margin-bottom: 1rem;
         }
-        
-        .video-placeholder {
-            background: #f8f9fa;
-            border: 2px dashed #ddd;
-            border-radius: 8px;
-            padding: 3rem;
-            text-align: center;
-            color: #999;
-            margin: 1rem 0;
-        }
-        
-        .doc-link {
-            display: block;
-            background: #f8f9fa;
-            padding: 1rem;
-            border-radius: 8px;
-            text-decoration: none;
-            color: #667eea;
-            margin: 0.5rem 0;
-            transition: background 0.3s;
-        }
-        
-        .doc-link:hover {
-            background: #e9ecef;
-        }
-        
+
+        /* Шаги */
         .steps {
             counter-reset: step;
         }
-        
+
         .step {
             position: relative;
             padding-left: 3rem;
             margin-bottom: 1.5rem;
         }
-        
+
         .step::before {
             counter-increment: step;
             content: counter(step);
@@ -147,14 +132,112 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
+            font-size: 0.9rem;
         }
-        
-        .placeholder {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
+
+        .step strong {
+            display: block;
+            margin-bottom: 0.25rem;
+            color: #333;
+        }
+
+        .step p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Кнопка-ссылка */
+        .btn-primary {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 1rem;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #5568d6;
+        }
+
+        /* doc-ссылки */
+        .doc-link {
+            display: block;
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #667eea;
+            margin: 0.5rem 0;
+            transition: background 0.3s;
+        }
+
+        .doc-link:hover {
+            background: #e9ecef;
+        }
+
+        /* Инфо-блоки */
+        .info-blue {
+            background: #e7f3ff;
+            border-left: 4px solid #2196f3;
             padding: 1rem;
             margin: 1rem 0;
             border-radius: 4px;
+            color: #444;
+        }
+
+        .info-yellow {
+            background: #fff3cd;
+            border-left: 4px solid #ff9800;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #444;
+        }
+
+        .info-green {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #444;
+        }
+
+        /* Блок "запасной вариант" */
+        .alternative {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .alternative-header {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #999;
+            margin-bottom: 0.75rem;
+        }
+
+        code {
+            background: #f8f9fa;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        ul {
+            color: #666;
+        }
+
+        ul li {
+            margin-bottom: 0.3rem;
         }
     </style>
 </head>
@@ -174,31 +257,24 @@
         </div>
 
         <div class="content">
+
             <!-- Быстрый старт -->
             <div class="section">
                 <h2>🚀 Быстрый старт</h2>
-                <p>Процесс создания вашего аудиобота занимает 3-5 дней и состоит из простых шагов:</p>
-                
+                <p>Создание бота проходит в три этапа. Каждый этап делается самостоятельно — я подключаюсь только в самом конце, чтобы запустить бота.</p>
+
                 <div class="steps">
                     <div class="step">
                         <strong><a href="#registration" style="color: #667eea; text-decoration: none;">Регистрация бота</a></strong>
-                        <p>Создайте бота через @BotFather и отправьте мне токен и ваш ID</p>
+                        <p>Создайте бота через @BotFather и добавьте его в TourBot через мастер-бот или конструктор.</p>
                     </div>
                     <div class="step">
-                        <strong><a href="#sheets" style="color: #667eea; text-decoration: none;">Заполнение Google Sheets</a></strong>
-                        <p>Скопируйте шаблон таблицы и заполните структуру вашей экскурсии</p>
+                        <strong><a href="#content" style="color: #667eea; text-decoration: none;">Подготовка и загрузка контента</a></strong>
+                        <p>Запишите аудио, подготовьте фото и соберите экскурсию в конструкторе — загрузка медиа включена прямо в него.</p>
                     </div>
                     <div class="step">
-                        <strong><a href="#audio" style="color: #667eea; text-decoration: none;">Запись аудио</a></strong>
-                        <p>Запишите аудиосопровождение для точек маршрута</p>
-                    </div>
-                    <div class="step">
-                        <strong>Отправка материалов</strong>
-                        <p>Поделитесь со мной ссылкой на таблицу и файлами — я настрою бота</p>
-                    </div>
-                    <div class="step">
-                        <strong>Запуск и тестирование</strong>
-                        <p>Через 1-2 дня бот готов — тестируйте и запускайте!</p>
+                        <strong>Запуск</strong>
+                        <p>Когда контент готов, я получаю уведомление и запускаю бота. Обычно это занимает 1–2 дня.</p>
                     </div>
                 </div>
             </div>
@@ -206,205 +282,113 @@
             <!-- Регистрация бота -->
             <div class="section" id="registration">
                 <h2>🤖 Регистрация бота</h2>
-                <p>Первый шаг — создать своего Telegram-бота. Это делается через специального бота @BotFather.</p>
-                
+                <p>Сначала нужно создать бота в Telegram и подключить его к платформе.</p>
+
                 <div class="steps">
                     <div class="step">
-                        <strong>Откройте @BotFather</strong>
-                        <p>В Telegram найдите и откройте бота <a href="https://t.me/BotFather" target="_blank" style="color: #667eea;">@BotFather</a> (с синей галочкой — это официальный бот)</p>
-                    </div>
-                    
-                    <div class="step">
-                        <strong>Создайте бота</strong>
-                        <p>Отправьте команду: <code style="background: #f8f9fa; padding: 0.2rem 0.5rem; border-radius: 4px;">/newbot</code></p>
-                        <p style="margin-top: 0.5rem;">BotFather попросит указать:</p>
+                        <strong>Создайте бота в @BotFather</strong>
+                        <p>Откройте <a href="https://t.me/BotFather" target="_blank" style="color: #667eea;">@BotFather</a> (с синей галочкой) и отправьте команду <code>/newbot</code>.</p>
+                        <p>BotFather попросит указать:</p>
                         <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-                            <li><strong>Название бота</strong> — любое, например: "Экскурсия по Тбилиси"</li>
-                            <li><strong>Username бота</strong> — должен заканчиваться на "bot", например: <code style="background: #f8f9fa; padding: 0.2rem 0.5rem;">tbilisi_tour_bot</code></li>
+                            <li><strong>Название</strong> — например: «Экскурсия по Тбилиси»</li>
+                            <li><strong>Username</strong> — должен заканчиваться на <code>bot</code>, например: <code>tbilisi_tour_bot</code></li>
                         </ul>
                     </div>
-                    
+
                     <div class="step">
                         <strong>Скопируйте токен</strong>
-                        <p>BotFather пришлёт вам сообщение с токеном — это длинная строка вида:</p>
+                        <p>BotFather пришлёт токен — длинную строку вида:</p>
                         <p style="background: #f8f9fa; padding: 1rem; border-radius: 4px; font-family: monospace; margin: 0.5rem 0;">1234567890:ABCdefGHIjklMNOpqrsTUVwxyz</p>
-                        <p><strong>⚠️ Важно:</strong> Скопируйте токен полностью, включая все символы и двоеточие. Никому не показывайте этот токен, кроме меня.</p>
+                        <p><strong>⚠️ Важно:</strong> скопируйте токен полностью, включая все символы и двоеточие. Никому не показывайте его, кроме меня.</p>
                     </div>
-                    
+
                     <div class="step">
-                        <strong>Узнайте ваш Telegram ID</strong>
-                        <p>Откройте бота <a href="https://t.me/userinfobot" target="_blank" style="color: #667eea;">@userinfobot</a> и нажмите START</p>
-                        <p style="margin-top: 0.5rem;">Бот пришлёт вам сообщение с вашим ID — это число вида: <code style="background: #f8f9fa; padding: 0.2rem 0.5rem;">123456789</code></p>
-                        <p style="margin-top: 0.5rem;">Скопируйте это число — это ваш <strong>Telegram ID</strong>.</p>
-                    </div>
-                    
-                    <div class="step">
-                        <strong>Отправьте мне данные</strong>
-                        <p>Напишите мне в <a href="https://t.me/natalia_kouz" target="_blank" style="color: #667eea;">@natalia_kouz</a> следующую информацию:</p>
-                        <div style="background: #f8f9fa; padding: 1rem; border-radius: 4px; margin: 0.5rem 0;">
-                            <p style="margin: 0.25rem 0;"><strong>Username бота:</strong> @ваш_бот</p>
-                            <p style="margin: 0.25rem 0;"><strong>Токен:</strong> [вставьте токен полностью]</p>
-                            <p style="margin: 0.25rem 0;"><strong>Ваш Telegram ID:</strong> [ваше число]</p>
-                            <p style="margin: 0.25rem 0;"><strong>Ваше имя для сайта:</strong> Имя Фамилия</p>
-                        </div>
+                        <strong>Добавьте бота в TourBot</strong>
+                        <p>Откройте мастер-бот <a href="https://t.me/tourbot" target="_blank" style="color: #667eea;">@tourbot</a> и следуйте инструкциям по добавлению нового бота. Или сделайте это сразу в конструкторе — после авторизации через Telegram там есть форма создания бота.</p>
+                        <p style="margin-top: 0.5rem;">После добавления вы получите доступ к конструктору для этого бота.</p>
                     </div>
                 </div>
-                
-                <div style="background: #e7f3ff; border-left: 4px solid #2196f3; padding: 1rem; margin: 1.5rem 0; border-radius: 4px;">
-                    <strong>💡 Совет:</strong> Username бота лучше выбирать связанным с названием экскурсии, чтобы туристам было понятно. Например: <code>paris_walk_bot</code>, <code>rome_audio_guide_bot</code>
+
+                <div class="info-blue">
+                    <strong>💡 Совет:</strong> Username лучше выбирать связанным с экскурсией — туристам будет понятно. Например: <code>paris_walk_bot</code>, <code>rome_audio_guide_bot</code>
                 </div>
             </div>
 
-            <!-- Google Sheets -->
-            <div class="section" id="sheets">
-                <h2>📊 Заполнение Google Sheets</h2>
-                <p>Структура экскурсии создаётся в Google Sheets таблице — это как сценарий вашего бота.</p>
-                
-                <div class="steps">
-                    <div class="step">
-                        <strong>Откройте шаблон</strong>
-                        <a href="https://docs.google.com/spreadsheets/d/1C1xrA6frXqyOhRw7Hmr6iFlNjJ1_TA46Em3J8gBpFuM/edit?usp=drive_link" target="_blank" class="doc-link">
-                        📋 Шаблон Google Sheets для контента (пустой)
-                        </a>
-                    </div>
-                    
-                    <div class="step">
-                        <strong>Скопируйте к себе</strong>
-                        <p>Нажмите <strong>Файл → Создать копию</strong> — таблица появится в вашем Google Drive</p>
-                    </div>
-                    
-                    <div class="step">
-                        <strong>Заполните по образцу</strong>
-                        <a href="https://docs.google.com/spreadsheets/d/1AqWxY5qz33BXjQU9eN7_o4JUYmnoFID_ilATAp8Ryyc/edit?usp=sharing" target="_blank" class="doc-link">
-                            📝 Пример заполненной таблицы
-                        </a>
-                </div>
-                
-                 <p style="margin-top: 1rem;">
-                    <a href="sheets-guide.html" style="display: inline-block; background: #667eea; color: white; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 500; margin-top: 1rem;">
-                        📖 Подробная инструкция по таблице
-                    </a>
-                </p>
-            </div>
+            <!-- Подготовка контента -->
+            <div class="section" id="content">
+                <h2>🎙️ Подготовка контента</h2>
+                <p>Запись аудио и сборка экскурсии в конструкторе идут параллельно — можно записать первую точку, сразу добавить её в конструктор, потом перейти ко второй и так далее.</p>
 
-            <!-- Запись аудио -->
-            <div class="section" id="audio">
-                <h2>🎙️ Запись аудио</h2>
-                <p>Для аудиоэкскурсии не нужна профессиональная студия — можно записать на обычный компьютер или телефон.</p>
-                
-                <h3 style="margin-top: 1.5rem; color: #333;">Программы для записи</h3>
-                
-                <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
-                    <p><strong>Windows:</strong></p>
-                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-                        <li><strong>Звукозапись (Voice Recorder)</strong> — встроенная программа, простая и удобная</li>
-                        <li><strong>Audacity</strong> — бесплатная программа для редактирования (можно вырезать заминки, повторы)</li>
-                    </ul>
-                </div>
-                
-                <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
-                    <p><strong>Mac:</strong></p>
-                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-                        <li><strong>QuickTime Player</strong> — встроенная программа (Файл → Новая аудиозапись)</li>
-                        <li><strong>GarageBand</strong> — для более сложного редактирования</li>
-                    </ul>
-                </div>
-                
-                <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
-                    <p><strong>Телефон:</strong></p>
-                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-                        <li><strong>Диктофон</strong> — стандартное приложение iOS/Android</li>
-                        <li>Качество современных смартфонов вполне подходит для экскурсий</li>
-                    </ul>
-                </div>
-                
-                <div class="info-box" style="margin-top: 1.5rem;">
-                    <strong>💡 Совет:</strong> Не обязательно записывать идеально с первого раза! В Audacity легко вырезать заминки, повторы или лишние паузы. Главное — естественная и понятная речь.
-                </div>
-                
-                <h3 style="margin-top: 1.5rem; color: #333;">Формат файлов</h3>
-                <ul style="margin-left: 1.5rem;">
-                    <li><strong>Формат:</strong> MP3</li>
-                    <li><strong>Качество:</strong> 128 kbps (достаточно для речи)</li>
-                    <li><strong>Размер:</strong> до 20 МБ на файл</li>
-                </ul>
-                
-                <h3 style="margin-top: 1.5rem; color: #333;">Советы по записи</h3>
-                <ul style="margin-left: 1.5rem;">
-                    <li>Запись в тихом помещении (отключите вентиляторы, кондиционеры)</li>
-                    <li>Микрофон на расстоянии 15-20 см от рта. По моему опыту, выносной микрофон не обязателен — встроенный в ноутбук неплохо справляется</li>
-                    <li>Говорите естественно, как будто рассказываете другу</li>
-                    <li>Делайте паузы между предложениями</li>
-                    <li>Если ошиблись — просто продолжите, потом вырежете в редакторе</li>
-                </ul>
-            </div>
+                <h3>Запись аудио</h3>
+                <p>Для аудиоэкскурсии не нужна студия — подойдёт обычный компьютер или телефон.</p>
 
-            <!-- Шаблоны и примеры -->
-            <div class="section" id="files">
-                <h2>📄 Подготовка медиафайлов</h2>
-                
-                <p>Перед заполнением таблицы подготовьте все медиафайлы:</p>
-                
+                <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+                    <p style="margin-bottom: 0.75rem;"><strong>Программы:</strong></p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>Windows:</strong> Звукозапись (встроена) или Audacity (бесплатно, можно вырезать паузы и повторы)</li>
+                        <li><strong>Mac:</strong> QuickTime Player → Файл → Новая аудиозапись</li>
+                        <li><strong>Телефон:</strong> стандартный Диктофон на iOS или Android</li>
+                    </ul>
+                </div>
+
+                <p><strong>Технические требования:</strong> формат MP3, 128 kbps, до 20 МБ на файл.</p>
+
+                <div class="info-blue" style="margin-top: 1rem;">
+                    <strong>💡</strong> Встроенный микрофон ноутбука вполне подходит. Запишите в тихом помещении, говорите естественно — как будто рассказываете другу. Ошиблись — продолжайте, лишнее потом вырежете в Audacity.
+                </div>
+
+                <h3>Остальные медиафайлы</h3>
                 <ul style="margin-left: 1.5rem;">
-                    <li><strong>Аудиофайлы</strong> — все фрагменты экскурсии. Обязательно включите приветствие и знакомство</li>
-                    <li><strong>Видео</strong> — если вы хотите дополнить экскурсию отрывком видео.</li>
-                    <li><strong>Иллюстрации</strong> — фотографии из портфеля или точек маршрута</li>
-                    <li><strong>Документы</strong> — бонусные материалы в формате PDF (если есть)</li>
-                </ul>
-                
-                <h3 style="margin-top: 1.5rem; color: #333;">Требования к файлам</h3>
-                <ul style="margin-left: 1.5rem;">
-                    <li><strong>Аудио:</strong> MP3</li>
+                    <li><strong>Изображения:</strong> JPG, PNG или WebP</li>
                     <li><strong>Видео:</strong> MP4</li>
-                    <li><strong>Изображения:</strong> Webp (формат для отправки), JPG, PNG (будут сконвертированы перед загрузкой в бота)</li>
                     <li><strong>Документы:</strong> PDF</li>
                 </ul>
-                
-                <h3 style="margin-top: 1.5rem; color: #333;">Именование файлов</h3>
-                <p>Сохраните файлы в одну папку и пронумеруйте по порядку. Название должно быть понятным — оно будет видно пользователю.</p>
-                
-                <div style="background: #e7f3ff; border-left: 4px solid #2196f3; padding: 1rem; margin: 1rem 0; border-radius: 4px;">
-                    <strong>💡 Примеры хороших названий:</strong>
-                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
-                        <li><code>01_Welcome.mp3</code></li>
-                        <li><code>05_Meeting_point.mp3</code></li>
-                        <li><code>10_Cathedral_exterior.jpg</code></li>
-                        <li><code>15_Bonus_map.pdf</code></li>
-                    </ul>
+
+                <div class="info-yellow" style="margin-top: 1rem;">
+                    <strong>⚠️</strong> Используйте только латиницу в названиях файлов. Пробелы заменяйте на подчёркивание. Пример: <code>01_welcome.mp3</code>, <code>05_cathedral.jpg</code>
                 </div>
-                
-                <div style="background: #fff3cd; border-left: 4px solid #ff9800; padding: 1rem; margin: 1.5rem 0; border-radius: 4px;">
-                    <strong>⚠️ Важно:</strong> Используйте только латиницу в названиях файлов. Избегайте пробелов (используйте подчёркивание _) и спецсимволов
+
+                <h3>Конструктор</h3>
+                <p>После добавления бота в платформу вам откроется конструктор по адресу <a href="https://constructor.tourbot.online" target="_blank" style="color: #667eea;">constructor.tourbot.online</a>. Авторизация — через Telegram.</p>
+                <p>В конструкторе вы создаёте блоки экскурсии, пишете тексты и загружаете медиафайлы прямо туда — никуда отдельно отправлять их не нужно.</p>
+
+                <a href="https://constructor.tourbot.online" target="_blank" class="btn-primary">
+                    Открыть конструктор →
+                </a>
+
+                <!-- Запасной вариант -->
+                <div class="alternative">
+                    <div class="alternative-header">Запасной вариант — Google Sheets</div>
+                    <p style="color: #666; margin-bottom: 0.75rem;">Если конструктор по какой-то причине не подходит, можно наполнить экскурсию через Google Sheets. Медиафайлы в этом случае нужно будет передать мне отдельно.</p>
+                    <a href="https://docs.google.com/spreadsheets/d/1C1xrA6frXqyOhRw7Hmr6iFlNjJ1_TA46Em3J8gBpFuM/edit?usp=drive_link" target="_blank" class="doc-link" style="margin-bottom: 0.5rem;">
+                        📋 Шаблон Google Sheets (пустой)
+                    </a>
+                    <a href="https://docs.google.com/spreadsheets/d/1AqWxY5qz33BXjQU9eN7_o4JUYmnoFID_ilATAp8Ryyc/edit?usp=sharing" target="_blank" class="doc-link" style="margin-bottom: 0.5rem;">
+                        📝 Пример заполненной таблицы
+                    </a>
+                    <a href="sheets-guide.html" class="doc-link">
+                        📖 Инструкция по заполнению таблицы
+                    </a>
                 </div>
             </div>
-            
-            <!-- Ссылки на шаблоны -->
+
+            <!-- Ссылки на материалы -->
             <div class="section">
-                <h2>📋 Ссылки на материалы</h2>
-                
-                <a href="https://docs.google.com/spreadsheets/d/1C1xrA6frXqyOhRw7Hmr6iFlNjJ1_TA46Em3J8gBpFuM/edit?usp=drive_link" target="_blank" class="doc-link">
-                    📋 Шаблон Google Sheets для контента (пустой)
-                </a>
-                <a href="https://docs.google.com/spreadsheets/d/1AqWxY5qz33BXjQU9eN7_o4JUYmnoFID_ilATAp8Ryyc/edit?usp=sharing" target="_blank" class="doc-link">
-                    📝 Пример заполненной таблицы
-                </a>
-                <a href="sheets-guide.html" class="doc-link">
-                    📖 Подробная инструкция по заполнению
-                </a>
-                <a href="tribute.html" class="doc-link">
-                    💸 Подключение оплаты через Tribute
-                </a>
+                <h2>📋 Полезные ссылки</h2>
+                <a href="https://constructor.tourbot.online" target="_blank" class="doc-link">🛠 Конструктор экскурсий</a>
+                <a href="tribute.html" class="doc-link">💸 Подключение оплаты через Tribute</a>
             </div>
 
             <!-- Контакты -->
             <div class="section">
                 <h2>💬 Нужна помощь?</h2>
-                <p>Если у вас остались вопросы или нужна консультация:</p>
+                <p>Если остались вопросы или нужна консультация:</p>
                 <p style="margin-top: 1rem;">
                     <strong>Telegram:</strong> <a href="https://t.me/natalia_kouz" target="_blank" style="color: #667eea;">@natalia_kouz</a><br>
                     <strong>Email:</strong> <a href="mailto:admin@tourbot.online" style="color: #667eea;">admin@tourbot.online</a>
                 </p>
             </div>
+
         </div>
     </div>
 </body>
