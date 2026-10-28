@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="icon" href="/favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Инструкция по конструктору - Tourbot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        nav {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav div {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 6rem 2rem 2rem;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            background: white;
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        .section h3 {
+            color: #333;
+            margin: 1.5rem 0 1rem;
+            font-size: 1.2rem;
+        }
+
+        .section p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #2196f3;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+            color: #444;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ff9800;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+            color: #444;
+        }
+
+        /* Место для будущего скрина — пока текстовая заглушка */
+        .placeholder {
+            background: #f8f9fa;
+            border: 2px dashed #c3c9f5;
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin: 1rem 0;
+            color: #888;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        code {
+            background: #f8f9fa;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 0.75rem;
+            text-align: left;
+            word-wrap: break-word;
+        }
+
+        table th {
+            background: #667eea;
+            color: white;
+        }
+
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        ul li, ol li {
+            margin-bottom: 0.5rem;
+        }
+
+        .steps {
+            counter-reset: step;
+        }
+
+        .step {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .step strong {
+            display: block;
+            margin-bottom: 0.25rem;
+            color: #333;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 0.5rem;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #5568d6;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div>
+            <a href="/">Главная</a>
+            <a href="/guide">Для гидов</a>
+            <a href="/guide/materials.html">Материалы</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>🛠 Как работать с конструктором</h1>
+            <p>Пошаговая инструкция: от токена бота до готовой экскурсии</p>
+        </div>
+
+        <div class="content">
+
+            <!-- 1. Создание тура -->
+            <div class="section" id="create-tour">
+                <h2>1. Создание тура</h2>
+                <p>Бот создаётся не в конструкторе, а в Telegram у <strong>@BotFather</strong> — это первый, обязательный шаг.</p>
+
+                <div class="steps">
+                    <div class="step">
+                        <strong>Получите токен у @BotFather</strong>
+                        <p>Откройте <a href="https://t.me/BotFather" target="_blank" style="color: #667eea;">@BotFather</a>, отправьте <code>/newbot</code>, придумайте имя и username (должен заканчиваться на <code>bot</code>). В ответ придёт токен — длинная строка вида <code>1234567890:ABCdefGHIjklMNOpqrsTUVwxyz</code>.</p>
+                    </div>
+                    <div class="step">
+                        <strong>Откройте визард создания тура</strong>
+                        <p>Это можно сделать двумя способами — результат одинаковый:</p>
+                        <ul>
+                            <li>через Mini App: кнопка «📱 Админ-панель» в мастер-боте → «Создать бот»;</li>
+                            <li>напрямую в конструкторе: страница создания нового тура.</li>
+                        </ul>
+                    </div>
+                    <div class="step">
+                        <strong>Пройдите 4 шага визарда</strong>
+                        <ol>
+                            <li><strong>Токен бота</strong> — вставьте токен от BotFather. Он сразу проверяется, и если всё верно, появится имя бота и кнопка «Далее».</li>
+                            <li><strong>Название тура</strong> — как экскурсия будет называться (до 80 символов).</li>
+                            <li><strong>Источник контента</strong> — выберите «Конструктор» (контент собирается прямо в веб-интерфейсе) или «Google Sheets» (контент ведётся в таблице).</li>
+                            <li><strong>Итог</strong> — проверьте сводку и нажмите «Создать тур».</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="placeholder">📷 Скрин: 4 шага визарда создания тура (токен → название → источник контента → итог)</div>
+
+                <div class="warning-box">
+                    <strong>⚠️ Важно:</strong> один и тот же токен бота или username можно зарегистрировать только один раз — повторная попытка вернёт ошибку.
+                </div>
+            </div>
+
+            <!-- 2. Песочница -->
+            <div class="section" id="sandbox">
+                <h2>2. Песочница: тур сразу доступен для теста</h2>
+                <p>Сразу после создания тур попадает в режим <strong>«🧪 Песочница»</strong> — ещё до выбора тарифа и оплаты:</p>
+                <ul>
+                    <li>бот уже отвечает на <code>/start</code> — доступ открыт любому пользователю Telegram, без пароля и оплаты;</li>
+                    <li>любой пароль, введённый тестовым пользователем, принимается автоматически;</li>
+                    <li>действия тестовых пользователей не попадают в статистику;</li>
+                    <li>в конструкторе и Mini App рядом с названием тура виден бейдж «🧪 Песочница».</li>
+                </ul>
+                <p>Это позволяет полностью собрать и проверить тур «на живую» до того, как платить за него.</p>
+
+                <div class="placeholder">📷 Скрин: бейдж «🧪 Песочница» в конструкторе рядом с названием тура</div>
+
+                <h3>Переход в активный режим</h3>
+                <p>Тур становится «действующим» (<code>active</code>), как только вы выберете платный тариф, примените промокод или вам подтвердят бартер. При этом все тестовые данные один раз очищаются — тур стартует «с чистого листа» для настоящих гостей. Активировать тур можно только один раз.</p>
+            </div>
+
+            <!-- 3. Блоки и сообщения -->
+            <div class="section" id="blocks">
+                <h2>3. Блоки и сообщения</h2>
+                <p>Экскурсия в конструкторе состоит из <strong>блоков</strong> — это «остановки» маршрута.</p>
+
+                <h3>Блок</h3>
+                <ul>
+                    <li><strong>имя</strong> (латиница/цифры/<code>_</code>) — должно быть уникальным в туре. Один блок обязателен всегда — он называется <code>start</code>, с него бот начинает разговор с гостем по команде <code>/start</code>;</li>
+                    <li><strong>уровень доступа</strong> — 0 (открыт всем) или 1–3 (нужен пароль нужного уровня);</li>
+                </ul>
+                <p>Блоки можно создавать, редактировать, удалять и менять их порядок в списке. При удалении блока удаляются все его сообщения и точки на карте.</p>
+
+                <div class="placeholder">📷 Скрин: список блоков тура в конструкторе</div>
+
+                <h3>Сообщения внутри блока</h3>
+                <p>Каждое сообщение в блоке имеет тип (текст, фото, аудио и т.д.) и порядковый номер — он определяет, в каком порядке гость получит сообщения, когда откроет блок.</p>
+                <p>Несколько фото или кнопок с одинаковым порядковым номером объединяются в одну «пачку»: фото уходят единым альбомом, кнопки — единой строкой под предыдущим сообщением.</p>
+
+                <div class="placeholder">📷 Скрин: экран редактирования сообщений внутри блока</div>
+
+                <h3>Проверка целостности тура</h3>
+                <p>Конструктор сам находит «зависшие» кнопки — те, что ведут на ещё не созданный блок — и предлагает создать такой блок одним кликом.</p>
+
+                <div class="info-box">
+                    <strong>💡 Совет:</strong> после сборки маршрута запустите проверку целостности — так вы сразу увидите, если забыли создать блок, на который уже ведёт кнопка.
+                </div>
+            </div>
+
+            <!-- 4. Форматы сообщений -->
+            <div class="section" id="message-types">
+                <h2>4. Форматы сообщений</h2>
+                <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Тип</th>
+                            <th>Как выглядит у гостя</th>
+                            <th>Особенности</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Текст</td>
+                            <td>обычное сообщение</td>
+                            <td>поддерживает HTML-форматирование</td>
+                        </tr>
+                        <tr>
+                            <td>Фото</td>
+                            <td>фото или альбом</td>
+                            <td>несколько фото с одним порядковым номером отправляются единым альбомом</td>
+                        </tr>
+                        <tr>
+                            <td>Аудио</td>
+                            <td>голосовое сообщение</td>
+                            <td>подпись к аудио приходит отдельным текстом перед ним</td>
+                        </tr>
+                        <tr>
+                            <td>Видео</td>
+                            <td>видео или ссылка</td>
+                            <td>внешняя ссылка (например, YouTube) отправляется как текст; загруженный файл — как видео с подписью</td>
+                        </tr>
+                        <tr>
+                            <td>Видео-заметка</td>
+                            <td>круглое видео Telegram</td>
+                            <td>подписи не поддерживаются</td>
+                        </tr>
+                        <tr>
+                            <td>Документ</td>
+                            <td>файл или ссылка</td>
+                            <td>загруженный файл идёт с подписью</td>
+                        </tr>
+                        <tr>
+                            <td>Локация</td>
+                            <td>точка на карте Telegram</td>
+                            <td>подпись приходит отдельным сообщением перед точкой</td>
+                        </tr>
+                        <tr>
+                            <td>Кнопка</td>
+                            <td>инлайн-кнопка под сообщением</td>
+                            <td>прикрепляется к соседнему сообщению, см. раздел 5</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+
+                <div class="info-box">
+                    <strong>💡</strong> При загрузке медиа конструктор сам оптимизирует файлы: фото сжимаются в WebP, аудио перекодируется в компактный OGG/Opus, видео переупаковывается в MP4. Можно также указать внешнюю ссылку вместо загрузки файла — тогда бот просто отправит гостю ссылку.
+                </div>
+            </div>
+
+            <!-- 5. Навигация -->
+            <div class="section" id="navigation">
+                <h2>5. Связь блоков между собой (навигация)</h2>
+                <p>Переходы между блоками полностью управляются кнопками. У кнопки есть тип действия:</p>
+                <ul>
+                    <li><strong>«Следующий блок»</strong> — при нажатии бот отправит содержимое указанного блока. Это основной способ построить маршрут — цепочка кнопок «дальше»;</li>
+                    <li><strong>«Связаться с гидом»</strong> — кнопка-ссылка на вас в Telegram;</li>
+                    <li><strong>«Ввести пароль»</strong> — запускает ввод пароля для доступа к закрытому контенту;</li>
+                    <li><strong>«Ссылка»</strong> — обычная кнопка-ссылка на внешний сайт.</li>
+                </ul>
+
+                <div class="placeholder">📷 Скрин: настройка кнопки и выбор целевого блока</div>
+
+                <div class="warning-box">
+                    <strong>⚠️ Важно:</strong> ветвление в конструкторе — это просто кнопки, ведущие на разные блоки. Никакой дополнительной логики нет: куда ведёт кнопка, туда и попадёт гость.
+                </div>
+            </div>
+
+            <!-- 6. Карта маршрута -->
+            <div class="section" id="map">
+                <h2>6. Карта маршрута</h2>
+                <p>Если в туре есть точки с координатами, гостю предлагается открыть интерактивную карту прямо в Telegram (Mini App):</p>
+                <ul>
+                    <li>режим карты — либо <strong>маршрут</strong> (точки соединены линиями), либо <strong>локации</strong> (отдельные точки без связи);</li>
+                    <li>каждая точка карты привязана к конкретному блоку — гость может открыть нужный блок прямо с карты;</li>
+                    <li>точки можно добавлять, редактировать и удалять — линии маршрута пересчитываются автоматически.</li>
+                </ul>
+
+                <div class="placeholder">📷 Скрин: редактор точек карты маршрута</div>
+            </div>
+
+            <!-- 7. Mini App -->
+            <div class="section" id="miniapp">
+                <h2>7. Mini App: разделы управления туром</h2>
+                <p>Помимо самого конструктора, у тура есть панель управления в Telegram (кнопка «📱 Админ-панель»):</p>
+                <ul>
+                    <li><strong>Контент</strong> — настройки автоудаления сообщений, прямая ссылка на конструктор, синхронизация Google Sheets;</li>
+                    <li><strong>Доступ</strong> — управление доступами гостей и токеном бота;</li>
+                    <li><strong>Тарифы</strong> — выбор и настройка платных тарифов;</li>
+                    <li><strong>Статистика</strong> — аналитика по туру;</li>
+                    <li><strong>Медиа</strong> — управление загруженными файлами;</li>
+                    <li><strong>Биллинг</strong> — статус подписки и бейдж песочницы/активности;</li>
+                    <li>отдельные экраны — рассылка гостям, экспорт списка гостей, каталог.</li>
+                </ul>
+
+                <div class="placeholder">📷 Скрин: главный экран Mini App с разделами управления</div>
+            </div>
+
+            <!-- 8. Итоговый путь -->
+            <div class="section" id="checklist">
+                <h2>8. Итоговый путь — от нуля до запуска</h2>
+                <ol>
+                    <li>Создать бота в @BotFather и получить токен.</li>
+                    <li>Зарегистрировать тур визардом (токен → название → источник контента → создать).</li>
+                    <li>Тур автоматически попадает в песочницу — бот уже отвечает на <code>/start</code>.</li>
+                    <li>Наполнить тур в конструкторе: создать блок <code>start</code>, добавить сообщения, связать блоки кнопками «следующий блок».</li>
+                    <li>Протестировать тур «на живую» в песочнице — без ограничений и без оплаты.</li>
+                    <li>Проверить целостность тура (нет ли кнопок на несуществующие блоки).</li>
+                    <li>Выбрать тариф или промокод — тур переходит в активный режим и готов принимать настоящих гостей.</li>
+                </ol>
+
+                <a href="https://constructor.tourbot.online" target="_blank" class="btn-primary">
+                    Открыть конструктор →
+                </a>
+            </div>
+
+            <!-- Контакты -->
+            <div class="section">
+                <h2>💬 Остались вопросы?</h2>
+                <p>Напишите в Telegram: <a href="https://t.me/natalia_kouz" target="_blank" style="color: #667eea;">@natalia_kouz</a></p>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
