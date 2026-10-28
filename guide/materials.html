@@ -266,7 +266,7 @@
                 <div class="steps">
                     <div class="step">
                         <strong><a href="#registration" style="color: #667eea; text-decoration: none;">Регистрация бота</a></strong>
-                        <p>Создайте бота через @BotFather и добавьте его в TourBot через мастер-бот или конструктор.</p>
+                        <p>Создайте бота через @BotFather и добавьте его в TourBot через <a href="https://t.me/tourbot_master_bot" target="_blank" style="color: #667eea;">мастер-бот</a> или <a href="https://constructor.tourbot.online" target="_blank" style="color: #667eea;">конструктор</a>.</p>
                     </div>
                     <div class="step">
                         <strong><a href="#content" style="color: #667eea; text-decoration: none;">Подготовка и загрузка контента</a></strong>
@@ -287,30 +287,34 @@
                 <div class="steps">
                     <div class="step">
                         <strong>Создайте бота в @BotFather</strong>
-                        <p>Откройте <a href="https://t.me/BotFather" target="_blank" style="color: #667eea;">@BotFather</a> (с синей галочкой) и отправьте команду <code>/newbot</code>.</p>
-                        <p>BotFather попросит указать:</p>
+                        <p>Откройте <a href="https://t.me/BotFather" target="_blank" style="color: #667eea;">@BotFather</a> (с синей галочкой) и нажмите кнопку <strong>Open</strong> — откроется мини-приложение со списком ваших ботов.</p>
+                        <p>Нажмите <strong>Create a new bot</strong> и придумайте:</p>
                         <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
                             <li><strong>Название</strong> — например: «Экскурсия по Тбилиси»</li>
-                            <li><strong>Username</strong> — должен заканчиваться на <code>bot</code>, например: <code>tbilisi_tour_bot</code></li>
+                            <li><strong>Username</strong> — должен заканчиваться на <code>bot</code></li>
                         </ul>
                     </div>
 
                     <div class="step">
                         <strong>Скопируйте токен</strong>
-                        <p>BotFather пришлёт токен — длинную строку вида:</p>
-                        <p style="background: #f8f9fa; padding: 1rem; border-radius: 4px; font-family: monospace; margin: 0.5rem 0;">1234567890:ABCdefGHIjklMNOpqrsTUVwxyz</p>
-                        <p><strong>⚠️ Важно:</strong> скопируйте токен полностью, включая все символы и двоеточие. Никому не показывайте его, кроме меня.</p>
+                        <p>После создания бота токен появится в мини-приложении в режиме «спойлер» (скрыт до нажатия). Нажмите на него, чтобы увидеть, и кнопку <strong>Copy</strong>, чтобы скопировать.</p>
+                        <p><strong>⚠️ Важно:</strong> вставьте скопированный токен в конструктор или в форму добавления бота на следующем шаге. Присылать мне токен не нужно — достаточно скопировать его самостоятельно.</p>
+                        <p style="margin-top: 0.5rem;">Рядом с токеном есть кнопка <strong>Revoke</strong> — она аннулирует токен и выдаёт новый. Используйте её только если токен скомпрометирован (тогда его понадобится обновить и в конструкторе).</p>
                     </div>
 
                     <div class="step">
                         <strong>Добавьте бота в TourBot</strong>
-                        <p>Откройте мастер-бот <a href="https://t.me/tourbot_master_bot" target="_blank" style="color: #667eea;">@tourbot</a> и следуйте инструкциям по добавлению нового бота. Или сделайте это сразу в конструкторе — после авторизации через Telegram там есть форма создания бота.</p>
+                        <p>Откройте мастер-бот <a href="https://t.me/tourbot_master_bot" target="_blank" style="color: #667eea;">@tourbot_master_bot</a> и следуйте инструкциям по добавлению нового бота. Или сделайте это сразу в <a href="https://constructor.tourbot.online" target="_blank" style="color: #667eea;">конструкторе</a> — после авторизации через Telegram там есть форма создания бота.</p>
                         <p style="margin-top: 0.5rem;">После добавления вы получите доступ к конструктору для этого бота.</p>
                     </div>
                 </div>
 
                 <div class="info-blue">
-                    <strong>💡 Совет:</strong> Username лучше выбирать связанным с экскурсией — туристам будет понятно. Например: <code>paris_walk_bot</code>, <code>rome_audio_guide_bot</code>
+                    <strong>💡 Совет:</strong> через username туристы будут находить вашу экскурсию в поиске Telegram, поэтому добавьте в него что-то уникальное — своё имя, тему или район маршрута. Экскурсий по одному городу в Telegram может быть сотня, и простой вариант вроде <code>tbilisi_tour_bot</code> почти наверняка уже занят или потеряется среди похожих.
+                </div>
+
+                <div class="info-yellow" style="margin-top: 1rem;">
+                    <strong>⚠️ Важно:</strong> username нельзя изменить после создания бота. Если позже решите переименовать экскурсию, бот всё равно будет находиться по старому username — придётся создавать нового. Подумайте над названием заранее.
                 </div>
             </div>
 
